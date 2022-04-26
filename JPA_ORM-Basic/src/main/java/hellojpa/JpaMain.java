@@ -17,23 +17,23 @@ public class JpaMain {
         tx.begin();
 
         try {
+       //      >>>>>>>>>>>>>여기까지 비영속성
             Member member = new Member();
-            member.setId(101L);
-            member.setName("Name");
+            member.setId(1004L);
+            member.setName("Angel");
 
-//            >>>>>>>>>>>>>여기까지 비영속성
 
 //            여기부터 영속성<<<<<<<<<<<<<<<<<<<
             System.out.println("===Before===");
            em.persist(member);
-           //em.detatch(member); 는 영속성 컨텍스트 분리
-            //em.remove(member); 는 객체를 삭제한 상태
             System.out.println("===After===");
-
+//           em.detatch(member); 는 영속성 컨텍스트 분리
+//            //em.remove(member); 는 객체를 삭제한 상태
+//
             Member findMember = em.find(Member.class, 101L);
             System.out.println("findMember = " + findMember.getId());
             System.out.println("findMember = " + findMember.getName());
-
+//
             tx.commit();
         }catch (Exception e){
             tx.rollback();
@@ -41,7 +41,7 @@ public class JpaMain {
             em.close();
         }
 
-        //code
+//        //code
         em.close();
         emf.close();
     }
