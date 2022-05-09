@@ -17,9 +17,23 @@ public class JpaMain {
         tx.begin();
 
         try {
-            Member member = new Member(200L,"member200");
+
+
+            Team team = new Team();
+            team.setName("TEAM JEONGYEON");
+            em.persist(team);
+
+            Member member = new Member();
+            member.setUsername("ggomi");
+            member.setTeam(team);
             em.persist(member);
+
+            team.addMember(member);
+//            team.getMembers().add(member); 이미 Member Entity 내부 연관관계 편의 메소드
+
             em.flush();
+            em.clear();
+
 
             tx.commit();
         }catch (Exception e){
